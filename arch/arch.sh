@@ -146,9 +146,6 @@ configure_printer() {
     echo -e "\e[1;34mSetting default printer...\e[0m"
     lpoptions -d Tearoom_Printer
     
-    echo -e "\e[1;34mPrinting test page...\e[0m"
-    lp -d Tearoom_Printer /usr/share/cups/data/testprint
-    
     echo -e "\n###########################################\n"
     sleep $DELAY
 }
