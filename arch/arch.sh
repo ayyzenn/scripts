@@ -14,7 +14,7 @@ PACMAN_PACKAGES=(
     "pipewire-pulse" "wireplumber" "gnome-calculator" "samba" "smbclient" "os-prober" "pavucontrol"
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
-    "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils"
+    "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk"
 )
 
 # List of packages to install via yay (AUR)

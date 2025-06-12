@@ -168,4 +168,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Note**: These scripts are designed for personal use and may need customization for your specific needs. Always review and understand what a script does before running it on your system. 
+**Note**: These scripts are designed for personal use and may need customization for your specific needs. Always review and understand what a script does before running it on your system.
