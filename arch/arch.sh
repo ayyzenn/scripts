@@ -14,7 +14,8 @@ PACMAN_PACKAGES=(
     "pipewire-pulse" "wireplumber" "gnome-calculator" "samba" "smbclient" "os-prober" "pavucontrol"
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
-    "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk"
+    "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk" "nodejs"
+    "npm"
 )
 
 # List of packages to install via yay (AUR)
@@ -39,7 +40,7 @@ refresh_keyring_and_update() {
     sudo pacman-key --populate archlinux
 
     echo -e "\e[1;34mRefreshing keys (this may take a moment)...\e[0m"
-    
+
     # Set a timeout for key refresh to prevent long hangs
     if ! timeout 5 sudo pacman-key --refresh-keys; then
         echo -e "\e[1;31mKey refresh timed out or failed.\e[0m"
@@ -75,7 +76,7 @@ install_pacman_packages() {
         if ! is_installed "$package"; then
             echo -e "\e[1;34mInstalling $package...\e[0m"
             sudo pacman -S --noconfirm "$package" || echo "$package installation failed" >> failed_packages.log
-            
+
         else
             echo -e "\e[1;32m$package is already installed. Skipping.\e[0m"
         fi
@@ -126,10 +127,10 @@ install_conda_tools() {
 configure_printer() {
     echo -e "\e[1;34mInstalling necessary packages...\e[0m"
     sudo pacman -S --noconfirm cups cups-filters cups-pdf samba smbclient gutenprint ghostscript
-    
+
     echo -e "\e[1;34mEnabling and starting necessary services...\e[0m"
     sudo systemctl enable --now cups smb nmb
-    
+
     if grep -q "workgroup = WORKGROUP" /etc/samba/smb.conf; then
         echo -e "\e[1;32mSamba configuration already exists. Skipping.\e[0m"
     else
@@ -138,14 +139,14 @@ configure_printer() {
         sudo systemctl restart smb nmb
         echo -e "\e[1;32mSamba configuration completed successfully!\e[0m"
     fi
-    
+
     echo -e "\e[1;34mAdding printer...\e[0m"
     lpadmin -p Tearoom_Printer -E -v smb://pshfast/saad.ahmad:saad321@192.168.1.147/tearoom -m drv:///sample.drv/generpcl.ppd
     sudo systemctl restart cups
-    
+
     echo -e "\e[1;34mSetting default printer...\e[0m"
     lpoptions -d Tearoom_Printer
-    
+
     echo -e "\n###########################################\n"
     sleep $DELAY
 }
@@ -179,7 +180,7 @@ clean_package_cache() {
 
 # Function to enable natural scrolling for touchpad
 touchpad_natural_scrolling() {
-    
+
     CONFIG_DIR="/etc/X11/xorg.conf.d"
     CONFIG_FILE="$CONFIG_DIR/30-touchpad.conf"
 
