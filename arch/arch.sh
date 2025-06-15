@@ -15,7 +15,7 @@ PACMAN_PACKAGES=(
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
     "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk" "nodejs"
-    "npm"
+    "npm" "materia-gtk-theme" "lxappearance"
 )
 
 # List of packages to install via yay (AUR)
@@ -220,6 +220,7 @@ set_cursor_theme() {
     mkdir -p ~/.config/gtk-3.0
     cat > ~/.config/gtk-3.0/settings.ini <<EOF
 [Settings]
+gtk-theme-name=Materia-dark
 gtk-cursor-theme-name=$theme
 gtk-cursor-theme-size=$size
 EOF
