@@ -15,7 +15,7 @@ PACMAN_PACKAGES=(
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
     "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk" "nodejs"
-    "npm" "materia-gtk-theme" "lxappearance" "plastic" "plastic_tui" "terminus-font"
+    "npm" "materia-gtk-theme" "lxappearance" "plastic" "plastic_tui"
 )
 
 # List of packages to install via yay (AUR)
@@ -243,7 +243,40 @@ EOF
     sleep $DELAY
 }
 
-
+# Function to setup the dotfiles
+setup_dotfiles() {
+    echo -e "\n\e[1;34mSetting up dotfiles...\e[0m"
+    if [ -d "$HOME/dotfiles" ]; then
+        echo -e "\e[1;32mDotfiles directory already exists. Skipping.\e[0m"
+    else
+        echo -e "\e[1;34mCloning dotfiles repository...\e[0m"
+        if git clone https://github.com/ayyzenn/dotfiles.git "$HOME/dotfiles"; then
+            echo -e "\e[1;32mDotfiles repository cloned successfully!\e[0m"
+            
+            # Save current directory and change to dotfiles directory
+            if cd "$HOME/dotfiles"; then
+                echo -e "\e[1;34mRunning dotfiles installation script...\e[0m"
+                if [ -x "./install.sh" ]; then
+                    if ./install.sh; then
+                        echo -e "\e[1;32mDotfiles setup completed successfully!\e[0m"
+                    else
+                        echo -e "\e[1;31mDotfiles installation script failed!\e[0m"
+                    fi
+                else
+                    echo -e "\e[1;31mInstall script not found or not executable!\e[0m"
+                fi
+                # Return to previous directory
+                cd - > /dev/null
+            else
+                echo -e "\e[1;31mFailed to change to dotfiles directory!\e[0m"
+            fi
+        else
+            echo -e "\e[1;31mFailed to clone dotfiles repository!\e[0m"
+        fi
+    fi
+    echo -e "\n###########################################\n"
+    sleep $DELAY
+}
 # Function to install all tools and apps
 install_all_tools() {
     echo -e "\e[1;34mInstalling all essential tools and applications...\e[0m"
@@ -266,6 +299,8 @@ install_all_tools() {
     systemctl --user restart pipewire wireplumber
     export DISPLAY=:0
 
+    sudo cp ~/.vimrc /root/.vimrc
+    
     echo -e "\e[1;32mAll tools and applications installed successfully!\e[0m"
     echo -e "\n###########################################\n"
 }
