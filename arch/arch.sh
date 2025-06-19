@@ -15,7 +15,7 @@ PACMAN_PACKAGES=(
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
     "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk" "nodejs"
-    "npm" "materia-gtk-theme" "lxappearance"
+    "npm" "materia-gtk-theme" "lxappearance" "plastic" "plastic_tui" "terminus-font"
 )
 
 # List of packages to install via yay (AUR)
