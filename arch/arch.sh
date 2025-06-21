@@ -15,7 +15,7 @@ PACMAN_PACKAGES=(
     "ttf-dejavu" "ttf-liberation" "noto-fonts" "xorg-xinput" "brightnessctl" "picom"
     "trash-cli" "ueberzug" "less" "alsa-utils" "pulsemixer" "dunst" "dos2unix" "flameshot" "reflector"
     "obs-studio" "ffmpeg" "intel-media-driver" "libva-intel-driver" "libva-utils" "noto-fonts-cjk" "nodejs"
-    "npm" "materia-gtk-theme" "lxappearance" "plastic" "plastic_tui"
+    "npm" "materia-gtk-theme" "lxappearance" "plastic" "plastic_tui" "numlockx" "clang"
 )
 
 # List of packages to install via yay (AUR)
@@ -259,6 +259,7 @@ setup_dotfiles() {
                 if [ -x "./install.sh" ]; then
                     if ./install.sh; then
                         echo -e "\e[1;32mDotfiles setup completed successfully!\e[0m"
+                        cd - > /dev/null
                     else
                         echo -e "\e[1;31mDotfiles installation script failed!\e[0m"
                     fi
@@ -298,6 +299,7 @@ install_all_tools() {
     sudo systemctl enable --now rtkit-daemon
     systemctl --user restart pipewire wireplumber
     export DISPLAY=:0
+    setup_dotfiles
 
     sudo cp ~/.vimrc /root/.vimrc
     
