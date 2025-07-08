@@ -177,7 +177,6 @@ clean_package_cache() {
     sudo pacman -Sc --noconfirm
 }
 
-
 # Function to enable natural scrolling for touchpad
 touchpad_natural_scrolling() {
 
@@ -282,6 +281,8 @@ setup_dotfiles() {
 install_all_tools() {
     echo -e "\e[1;34mInstalling all essential tools and applications...\e[0m"
 
+    sudo pacman -S reflector --noconfirm
+    reflector --download-timeout 120 --country India,Singapore --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
     update_system
     sudo pacman -R i3lock --noconfirm
 
